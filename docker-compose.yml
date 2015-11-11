@@ -19,10 +19,10 @@ cfg1:
     - rs2srv1:rs2srv1
     - rs1srv1:rs1srv1
 
-mongos1:
-    build: mongos
-    command: --port 27017 --configdb cfg1:27017
-    ports:
-    - "27017:27017"
-    links:
-    - cfg1:cfg1
+#mongos1:
+#    build: mongos
+#    command: --port 27017 --configdb cfg1:27017
+#    ports:
+#    - "27017:27017"
+#    links:
+#    - cfg1:cfg1
