@@ -1,0 +1,15 @@
+rs1_srv1:
+    build: mongod
+    command: --replSet rs2 --noprealloc --smallfiles
+
+rs2_srv1:
+    build: mongod
+    command: --replSet rs2 --noprealloc --smallfiles
+
+cfg1:
+
+docker run -P --name=cfg1 -d thb1/mongodb --noprealloc --smallfiles --configsvr --dbpath /data/db --port 27017
+
+mongos:
+    build: mongos
+
