@@ -6,13 +6,13 @@ rs1srv1:
 
 rs2srv1:
     build: mongod
-    command: --replSet rs2 --noprealloc --smallfiles
+    command: "--replSet rs2 --noprealloc --smallfiles"
     ports:
     - "27017"
 
 cfg1:
     build: mongod
-    command: --noprealloc --smallfiles --configsvr --dbpath /data/db --port 27017
+    command: "--noprealloc --smallfiles --configsvr --dbpath /data/db --port 27017"
     ports:
     - "27017"
     links:
