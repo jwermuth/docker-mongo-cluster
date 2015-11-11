@@ -26,3 +26,5 @@ mongos1:
     - "27017:27017"
     links:
     - cfg1:cfg1
+    - rs2srv1:rs2srv1
+    - rs1srv1:rs1srv1
