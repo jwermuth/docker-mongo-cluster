@@ -1,13 +1,10 @@
-rs1_srv1:
+rs1srv1:
     build: mongod
-    command: --replSet rs1 --noprealloc --smallfiles
+    command: "--replSet rs1 --noprealloc --smallfiles"
     ports:
     - "27017"
-  links:
-   - db
-   - db:database
 
-rs2_srv1:
+rs2srv1:
     build: mongod
     command: --replSet rs2 --noprealloc --smallfiles
     ports:
@@ -19,10 +16,9 @@ cfg1:
     ports:
     - "27017"
     links:
-    - rs2_srv1:rs2_srv1
-    - rs1_srv1:rs1_srv1
+    - rs2srv1:rs2srv1
+    - rs1srv1:rs1srv1
 
-#docker run -P --name=mongos1 -d thb1/mongos --port 27017 --configdb 172.17.0.9:27017,172.17.0.9:27017,172.17.0.10:27017
 mongos1:
     build: mongos
     command: --port 27017 --configdb cfg1:27017
