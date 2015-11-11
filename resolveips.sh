@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 pipework also great, but If you can use hostname other than ip then you can try this script
 
 #!/bin/bash
