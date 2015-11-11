@@ -18,6 +18,9 @@ cfg1:
     command: --noprealloc --smallfiles --configsvr --dbpath /data/db --port 27017
     ports:
     - "27017"
+    links:
+    - rs2_srv1:rs2_srv1
+    - rs1_srv1:rs1_srv1
 
 #docker run -P --name=mongos1 -d thb1/mongos --port 27017 --configdb 172.17.0.9:27017,172.17.0.9:27017,172.17.0.10:27017
 mongos1:
@@ -25,3 +28,5 @@ mongos1:
     command: --port 27017 --configdb cfg1:27017
     ports:
     - "27017:27017"
+    links:
+    - cfg1:cfg1
