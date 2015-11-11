@@ -3,12 +3,16 @@ rs1srv1:
     command: "--replSet rs1 --noprealloc --smallfiles"
     ports:
     - "27017"
+    links:
+    - cfg1:cfg1
 
 rs2srv1:
     build: mongod
     command: "--replSet rs2 --noprealloc --smallfiles"
     ports:
     - "27017"
+    links:
+    - cfg1:cfg1
 
 cfg1:
     build: mongod
