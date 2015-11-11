@@ -3,12 +3,16 @@ rs1srv1:
     command: "--replSet rs1 --noprealloc --smallfiles"
     ports:
     - "27017"
+    links:
+    - ambassador:cfg1
 
 rs2srv1:
     build: mongod
     command: "--replSet rs2 --noprealloc --smallfiles"
     ports:
     - "27017"
+    links:
+    - ambassador:cfg1
 
 cfg1:
     build: mongod
@@ -16,8 +20,8 @@ cfg1:
     ports:
     - "27017"
     links:
-    - rs2srv1:rs2srv1
-    - rs1srv1:rs1srv1
+    - ambassador:rs2srv1
+    - ambassador:rs1srv1
 
 mongos1:
     build: mongos
@@ -25,8 +29,31 @@ mongos1:
     ports:
     - "27017:27017"
     links:
-    - cfg1:cfg1
-    - rs2srv1:rs2srv1
-    - rs1srv1:rs1srv1
+    - ambassador:cfg1
+    - ambassador:rs2srv1
+    - ambassador:rs1srv1
 
+
+ambassador:
+    image: cpuguy83/docker-grand-ambassador
+    volumes:
+         - "/var/run/docker.sock:/docker.sock"
+    name:
+         - "rs1srv1"
+         - "rs2srv1"
+         - "cfg1"
+
+#container1:
+#    image: user/container1
+#    ports:
+#        - "8000:8000"
+#    links:
+#        - "ambassador:container1"
+#
+#container2:
+#    image: user/container2
+#    ports:
+#        - "8080:8080"
+#    links:
+#        - "ambassador:container2"
 
